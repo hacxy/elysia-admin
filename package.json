@@ -11,7 +11,8 @@
     "lint:fix": "eslint . --fix",
     "lint:staged": "eslint --fix",
     "prepare": "simple-git-hooks",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "gen-type:i18n": "i18next-resources-for-ts interface -i ./src/locale -o ./src/@types && eslint --fix ./src/@types/resources.d.ts"
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
@@ -37,6 +38,7 @@
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "i18next-resources-for-ts": "^1.8.0",
     "lint-staged": "^16.2.7",
     "simple-git-hooks": "^2.13.1",
     "typescript": "~5.9.3",
