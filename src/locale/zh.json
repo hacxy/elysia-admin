@@ -1,0 +1,18 @@
+{
+  "common": {
+    "title": "Elysia Admin",
+    "logout": "退出登录",
+    "switchToLightTheme": "切换到亮色主题",
+    "switchToDarkTheme": "切换到暗色主题",
+    "switchLanguage": "切换语言"
+  },
+  "menu": {
+    "welcome": "欢迎",
+    "user": "用户"
+  },
+  "footer": {
+    "copyright": "© 2025 Made with Hacxy",
+    "author": "by Hacxy"
+  },
+  "test": "test"
+}

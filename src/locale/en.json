@@ -1,0 +1,18 @@
+{
+  "common": {
+    "title": "Elysia Admin",
+    "logout": "Logout",
+    "switchToLightTheme": "Switch to light theme",
+    "switchToDarkTheme": "Switch to dark theme",
+    "switchLanguage": "Switch language"
+  },
+  "menu": {
+    "welcome": "Welcome",
+    "user": "User"
+  },
+  "footer": {
+    "copyright": "© 2025 Made with Hacxy",
+    "author": "by Hacxy"
+  },
+  "test": "test"
+}

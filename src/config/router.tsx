@@ -18,7 +18,8 @@ const loggingMiddleware: MiddlewareFunction = async ({ request }, next) => {
   await next();
 };
 
-type RouteObjectWithChildren = RouteObject & {
+export type RouteObjectWithChildren = RouteObject & {
+  name?: string
   children?: RouteObject['children'] & {
     name?: string
     exact?: boolean
