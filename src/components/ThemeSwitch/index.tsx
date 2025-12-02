@@ -1,9 +1,8 @@
-import { MoonOutlined, SunOutlined } from '@ant-design/icons';
-import { Switch, Tooltip } from 'antd';
+import { MoonFilled, SunFilled } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
-import './index.css';
 
-const THEME_STORAGE_KEY = 'elysia-admin-theme';
+const THEME_STORAGE_KEY = 'isDark';
 
 interface ThemeSwitchProps {
   /** 主题值（受控模式），传入 true/false 表示受控，不传或传入 null 表示非受控 */
@@ -19,8 +18,8 @@ interface ThemeSwitchProps {
 }
 
 /**
- * 主题切换 Switch 组件
- * 用于在亮色和暗色主题之间切换
+ * 主题切换组件
+ * 使用 emoji 按钮在亮色和暗色主题之间切换
  */
 export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   value,
@@ -34,7 +33,7 @@ export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     if (persist && typeof window !== 'undefined') {
       const saved = localStorage.getItem(THEME_STORAGE_KEY);
       if (saved !== null) {
-        return saved === 'dark';
+        return saved === 'true';
       }
     }
     return defaultDark;
@@ -49,7 +48,7 @@ export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
   // 同步到 localStorage
   useEffect(() => {
     if (persist && typeof window !== 'undefined') {
-      localStorage.setItem(THEME_STORAGE_KEY, currentDark ? 'dark' : 'light');
+      localStorage.setItem(THEME_STORAGE_KEY, String(currentDark));
     }
   }, [currentDark, persist]);
 
@@ -61,25 +60,39 @@ export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({
     onChange?.(checked);
   };
 
-  const switchElement = (
-    <Switch
-      checked={currentDark}
-      onChange={handleChange}
-      checkedChildren={<MoonOutlined />}
-      unCheckedChildren={<SunOutlined />}
-      className="theme-switch"
-    />
+  const emojiButton = (
+    <div
+      className="theme-switch-emoji"
+      onClick={() => handleChange(!currentDark)}
+      aria-label={currentDark ? '切换到亮色主题' : '切换到暗色主题'}
+    >
+
+    </div>
   );
 
   if (showTooltip) {
     return (
       <Tooltip title={currentDark ? '切换到亮色主题' : '切换到暗色主题'}>
-        {switchElement}
+        {currentDark
+          ? (
+            <MoonFilled
+              onClick={
+                () => handleChange(!currentDark)
+              }
+            />
+          )
+          : (
+            <SunFilled
+              onClick={
+                () => handleChange(!currentDark)
+              }
+            />
+          )}
       </Tooltip>
     );
   }
 
-  return switchElement;
+  return emojiButton;
 };
 
 export default ThemeSwitch;

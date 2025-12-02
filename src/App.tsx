@@ -1,6 +1,7 @@
-import { GithubFilled, InfoCircleFilled, LogoutOutlined, QuestionCircleFilled } from '@ant-design/icons';
+import { GithubFilled, LogoutOutlined } from '@ant-design/icons';
 import { PageContainer, ProConfigProvider, ProLayout } from '@ant-design/pro-components';
 import { ConfigProvider, Dropdown } from 'antd';
+import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import ThemeSwitch from './components/ThemeSwitch';
 import { menuRoute } from './config/router';
@@ -8,8 +9,9 @@ import { menuRoute } from './config/router';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [dark, setDark] = useState(localStorage.getItem('isDark') === 'true');
   return (
-    <ProConfigProvider dark={false}>
+    <ProConfigProvider dark={dark}>
       <ConfigProvider>
         <ProLayout
           colorPrimary="#1677FF"
@@ -91,9 +93,13 @@ function App() {
             if (typeof window === 'undefined')
               return [];
             return [
-              <ThemeSwitch key="ThemeSwitch" />,
-              <InfoCircleFilled key="InfoCircleFilled" />,
-              <QuestionCircleFilled key="QuestionCircleFilled" />,
+              <ThemeSwitch
+                key="ThemeSwitch"
+                value={dark}
+                onChange={val => {
+                  setDark(val);
+                }}
+              />,
               <GithubFilled
                 key="GithubFilled"
                 onClick={() => {
